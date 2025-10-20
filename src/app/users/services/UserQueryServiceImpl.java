@@ -1,10 +1,9 @@
-package app.service;
+package app.users.services;
 
-import app.exceptions.UserNotFoundException;
-import app.users.Admin;
-import app.users.Client;
-import app.users.Permissions;
-import app.users.User;
+import app.users.exceptions.UserNotFoundException;
+import app.users.models.Admin;
+import app.users.models.Client;
+import app.users.models.User;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -15,7 +14,7 @@ public class UserQueryServiceImpl implements UserQueryService {
     private File file;
     private List<User> users;
     public UserQueryServiceImpl(){
-        this.file=new File("C:\\mycode\\oop\\mostenirea\\retea-de-socializare\\src\\app\\users\\Users.txt");
+        this.file=new File("C:\\mycode\\oop\\mostenirea\\retea-de-socializare\\src\\app\\users\\repository\\users.txt");
         this.users=new ArrayList<>();
         this.loadUsers();
     }

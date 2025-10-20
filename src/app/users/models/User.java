@@ -1,4 +1,7 @@
-package app.users;
+package app.users.models;
+
+import app.users.Permissions;
+import app.users.UserPermissions;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

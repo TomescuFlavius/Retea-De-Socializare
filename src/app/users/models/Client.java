@@ -1,9 +1,11 @@
-package app.users;
+package app.users.models;
+
+import app.users.Permissions;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Client extends User{
+public class Client extends User {
     private boolean activ;
 
     public Client(int id, String username, String password, LocalDate createdAt, boolean activ){

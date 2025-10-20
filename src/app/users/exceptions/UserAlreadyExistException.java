@@ -1,6 +1,6 @@
-package app.exceptions;
+package app.users.exceptions;
 
-import static app.system.ExceptionsConstants.USER_ALREADY_EXIST_EXCEPTION;
+import static app.system.constants.ExceptionsConstants.USER_ALREADY_EXIST_EXCEPTION;
 
 public class UserAlreadyExistException extends Exception {
 

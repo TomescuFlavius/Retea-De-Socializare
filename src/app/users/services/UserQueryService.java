@@ -1,7 +1,7 @@
-package app.service;
+package app.users.services;
 
-import app.exceptions.UserNotFoundException;
-import app.users.User;
+import app.users.exceptions.UserNotFoundException;
+import app.users.models.User;
 
 import java.util.List;
 

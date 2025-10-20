@@ -1,6 +1,6 @@
-package app.exceptions;
+package app.users.exceptions;
 
-import static app.system.ExceptionsConstants.USER_NOT_FOUND_EXCEPTION;
+import static app.system.constants.ExceptionsConstants.USER_NOT_FOUND_EXCEPTION;
 
 public class UserNotFoundException extends Exception {
     public UserNotFoundException() {
