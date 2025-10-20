@@ -46,9 +46,8 @@ public class PhotoCommandServiceImpl implements PhotoCommandService {
     }
 
     public  void savePhotos(){
-        try (PrintWriter writer=new PrintWriter(new FileWriter(file))){
+        try (PrintWriter writer=new PrintWriter(new FileWriter(this.file))){
             writer.print(this);
-
         }catch (IOException e){
             e.printStackTrace();
         }

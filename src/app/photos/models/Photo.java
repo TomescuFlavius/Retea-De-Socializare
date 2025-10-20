@@ -1,6 +1,6 @@
 package app.photos.models;
 
-import app.users.models.User;
+
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

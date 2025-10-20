@@ -17,6 +17,8 @@ public class Admin extends User {
         this.salary = salary;
         this.addPermission(Permissions.USER_READ);
         this.addPermission(Permissions.USER_CREATE);
+        this.addPermission(Permissions.USER_DELETE);
+        this.addPermission(Permissions.USER_UPDATE);
     }
 
     public Admin(String text){
@@ -106,7 +108,7 @@ public class Admin extends User {
     @Override
     public String toString() {
         return getId() + "," + getUsername() + "," + getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) +
-                "," + salary+ "," + dateOfEmploy.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "," + permissions;
+                "," + salary+ "," + dateOfEmploy.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "," + permissions+ "\n";
     }
 
     @Override

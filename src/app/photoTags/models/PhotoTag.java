@@ -1,6 +1,6 @@
 package app.photoTags.models;
 
-public class PhotoTag {
+public class PhotoTag  implements  Comparable{
     int photoId;
     int tagId;
 
@@ -33,5 +33,10 @@ public class PhotoTag {
     @Override
     public String toString(){
         return photoId + "," +tagId;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
     }
 }

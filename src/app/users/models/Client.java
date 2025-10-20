@@ -90,7 +90,7 @@ public class Client extends User {
     public String toString(){
         return getId()+ ","+ getUsername()+ ","+password+","+
                 getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
-                +","+permissions+","+ activ;
+                +","+permissions+","+ activ + "\n";
     }
 
     @Override

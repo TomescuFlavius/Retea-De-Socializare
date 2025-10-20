@@ -1,16 +1,16 @@
 package app.comments.models;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Comment {
+public class Comment implements Comparable {
     private int id;
     private int photoId;
     private int userId;
-    private LocalDateTime createdAt;
+    private LocalDate createdAt;
     private String commentText;
 
-    public Comment(int id, int photoId, int userId, LocalDateTime createdAt, String commentText) {
+    public Comment(int id, int photoId, int userId, LocalDate createdAt, String commentText) {
         this.id = id;
         this.photoId = photoId;
         this.userId = userId;
@@ -23,7 +23,7 @@ public class Comment {
         this.id = Integer.parseInt(properties[0]);
         this.photoId = Integer.parseInt(properties[1]);
         this.userId = Integer.parseInt(properties[2]);
-        this.createdAt = LocalDateTime.parse(properties[3], DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        this.createdAt = LocalDate.parse(properties[3], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         this.commentText = properties[4];
     }
 
@@ -39,11 +39,16 @@ public class Comment {
         return new Builder();
     }
 
+    @Override
+    public int compareTo(Object o) {
+        return 0;
+    }
+
     public static class Builder {
         private int id;
         private int photoId;
         private int userId;
-        private LocalDateTime createdAt;
+        private LocalDate createdAt;
         private String commentText;
 
         public Builder id(int id) {
@@ -61,7 +66,7 @@ public class Comment {
             return this;
         }
 
-        public Builder createdAt(LocalDateTime createdAt) {
+        public Builder createdAt(LocalDate createdAt) {
             this.createdAt = createdAt;
             return this;
         }
@@ -88,7 +93,7 @@ public class Comment {
         return userId;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public LocalDate getCreatedAt() {
         return createdAt;
     }
 
@@ -108,7 +113,7 @@ public class Comment {
         this.userId = userId;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
     }
 
@@ -119,7 +124,7 @@ public class Comment {
     @Override
     public String toString() {
         return id + "," + photoId + "," + userId + "," +
-                createdAt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + "," + commentText;
+                createdAt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "," + commentText;
     }
 
     @Override

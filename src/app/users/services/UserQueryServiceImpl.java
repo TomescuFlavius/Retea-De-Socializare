@@ -1,5 +1,6 @@
 package app.users.services;
 
+import app.users.Permissions;
 import app.users.exceptions.UserNotFoundException;
 import app.users.models.Admin;
 import app.users.models.Client;
@@ -61,4 +62,16 @@ public class UserQueryServiceImpl implements UserQueryService {
         }
         return goodUsers;
     }
+
+    @Override
+    public List<User> showUsers() {
+            return users;
+    }
+
+    @Override
+    public List<Admin> showAdmins() {
+        return null;
+    }
+
+
 }
