@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface CommentQueryService {
     List<Comment> getAllComments();
+    List<Comment> afisareComentariiByUserId(int id);
 }

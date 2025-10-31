@@ -5,6 +5,5 @@ import app.photos.models.Photo;
 import java.util.List;
 
 public interface PhotoQueryService {
-    List<Photo> getAllPhotos();
 
 }

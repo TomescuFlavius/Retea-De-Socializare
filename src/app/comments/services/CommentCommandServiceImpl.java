@@ -1,6 +1,5 @@
 package app.comments.services;
 
-import app.comments.exceptions.CommentAlreadyExistException;
 import app.comments.exceptions.CommentNotFoundException;
 import app.comments.models.Comment;
 
@@ -44,7 +43,7 @@ public class CommentCommandServiceImpl implements CommentCommandService {
     public String toString(){
         String text="";
         int i;
-        for (i=0;i<comments.size();i++){
+        for (i=0;i<comments.size()-1;i++){
             Comment comment= comments.get(i);
             text+=comment.toString()+"\n";
         }
@@ -84,12 +83,8 @@ public class CommentCommandServiceImpl implements CommentCommandService {
     }
 
     @Override
-    public Comment add(Comment comment) throws CommentAlreadyExistException {
-        for (Comment comment1: comments){
-            if(comment1.equals(comment)){
-                throw new CommentAlreadyExistException();
-            }
-        }
+    public Comment add(Comment comment) {
+
         comment.setId(generateId());
         comments.add(comment);
         saveComents();

@@ -1,109 +1,32 @@
 package app.users.services;
-
-import app.photos.models.Photo;
 import app.users.exceptions.UserAlreadyExistException;
 import app.users.exceptions.UserNotFoundException;
-import app.users.models.Admin;
-import app.users.models.Client;
 import app.users.models.User;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import app.users.repository.UserRepository;
+import app.users.repository.UserRepositorySingleton;
+
 
 public class UserCommandServiceImpl implements UserCommandService {
-    private List<User> users;
-    private File file;
+
+    private UserRepository userRepository;
 
     public UserCommandServiceImpl(){
-        users=new ArrayList<>();
-        this.file=new File("C:\\mycode\\oop\\mostenirea\\retea-de-socializare\\src\\app\\users\\repository\\users.txt");
-        this.loadUsers();
-    }
-
-    public void loadUsers(){
-        try {
-            Scanner scanner= new Scanner(file);
-            while (scanner.hasNextLine()){
-                String line=scanner.nextLine();
-                switch (line.split(",")[0]){
-                 case "ADMIN"->this.users.add(new Admin(line));
-                 case "CLIENT"->this.users.add(new Client(line));
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public String toString(){
-        String text="";
-        int i;
-        for (i=0;i<users.size();i++){
-            User user=users.get(i);
-            text+=user.toString()+"\n";
-        }
-        return users.get(i).toString()+"\n";
-    }
-
-    public  void saveUsers(){
-        try (PrintWriter writer=new PrintWriter(new FileWriter(file))){
-            writer.print(this);
-
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-    }
-
-    private User getUserById(int id){
-        for(User user: users){
-            if (user.getId()==id){
-                return user;
-            }
-        }
-        return null;
-    }
-
-    private int RandomId(){
-        Random random=new Random();
-        int id=random.nextInt(100)+1;
-        return id;
-    }
-
-    private int generateId(){
-        int id=RandomId();
-        while (getUserById(id)!=null){
-            id=RandomId();
-        }
-        return id;
+        this.userRepository= UserRepositorySingleton.getInstance();
     }
 
     @Override
     public User add(User user) throws UserAlreadyExistException {
-        for(User user1: users){
-            if (user1.equals(user)){
-                throw new UserAlreadyExistException();
-            }
+         if(userRepository.getUserByUsername(user.getUsername())!=null){
+             throw  new UserAlreadyExistException();
         }
-        user.setId(generateId());
-        users.add(user);
-        saveUsers();
-        return user;
+        return userRepository.add(user);
     }
 
     @Override
     public User deleteUser(User user) throws UserNotFoundException {
-        if (!users.contains(user)){
+        if (userRepository.getUserByUsername(user.getUsername())==null){
             throw new UserNotFoundException();
         }
-        users.remove(user);
-        saveUsers();
-        return user;
+        return userRepository.delete(user);
     }
-
-
 }

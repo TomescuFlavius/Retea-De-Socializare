@@ -34,4 +34,15 @@ public class CommentQueryServiceImpl implements CommentQueryService{
     public List<Comment> getAllComments() {
         return this.comments;
     }
+
+    @Override
+    public List<Comment> afisareComentariiByUserId(int id) {
+        List<Comment> comments1=new ArrayList<>();
+        for (Comment comment:comments){
+            if (comment.getUserId()==id){
+                comments1.add(comment);
+            }
+        }
+        return comments1;
+    }
 }

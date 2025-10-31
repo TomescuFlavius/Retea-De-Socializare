@@ -24,7 +24,7 @@ public class Photo implements Comparable {
         this.id=Integer.parseInt(properties[0]);
         this.userId=Integer.parseInt(properties[1]);
         this.imageUrl=properties[2];
-        this.createdAt = LocalDate.parse(properties[4], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        this.createdAt = LocalDate.parse(properties[3], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
     public int getId() {

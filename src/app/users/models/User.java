@@ -79,7 +79,7 @@ public abstract class User implements Comparable<User>, UserPermissions {
 
     @Override
     public String toString() {
-        return id + "," + username + "," +password + "," + createdAt+","+permissions;
+        return  id + "," + username + "," +password + "," + createdAt+","+permissions;
     }
 
     @Override
