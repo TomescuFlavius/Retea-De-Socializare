@@ -5,5 +5,5 @@ import app.likes.models.Like;
 
 public interface LikeCommandService {
     Like add(Like like) throws YouAlreadyLikedThePhotoException;
-    Like delete(Like like);
+
 }

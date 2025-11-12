@@ -1,7 +1,9 @@
 package app.users.repository;
+
 import app.users.models.Admin;
 import app.users.models.Client;
 import app.users.models.User;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -21,7 +23,6 @@ public class UserRepositoryImpl implements UserRepository {
         users=new ArrayList<>();
         this.file=new File("C:\\mycode\\oop\\mostenirea\\retea-de-socializare\\src\\app\\users\\repository\\users.txt");
         this.loadUsers();
-
     }
 
     public void loadUsers(){

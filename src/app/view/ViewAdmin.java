@@ -1,16 +1,22 @@
 package app.view;
 
 import app.comments.models.Comment;
+import app.comments.repository.CommentRepository;
+import app.comments.repository.CommentRepositorySingleton;
 import app.comments.services.CommentCommandService;
 import app.comments.services.CommentCommandServiceSingleton;
 import app.comments.services.CommentQueryService;
 import app.comments.services.CommentQueryServiceSingleton;
+import app.followers.repository.FollowerRepository;
+import app.followers.repository.FollowerRepositorySingleton;
 import app.followers.services.FollowerCommandService;
 import app.followers.services.FollowerCommandServiceSingleton;
 import app.followers.services.FollowerQueryService;
 import app.followers.services.FollowerQueryServiceSingleton;
 import app.likes.exceptions.YouAlreadyLikedThePhotoException;
 import app.likes.models.Like;
+import app.likes.repository.LikeRepository;
+import app.likes.repository.LikeRepositorySingleton;
 import app.likes.services.LikeCommandService;
 import app.likes.services.LikeCommandServiceSingleton;
 import app.likes.services.LikeQueryService;
@@ -27,7 +33,6 @@ import app.tags.services.TagCommandServiceSingleton;
 import app.tags.services.TagQueryService;
 import app.tags.services.TagQueryServiceSingleton;
 import app.users.models.Admin;
-import app.users.models.Client;
 import app.users.models.User;
 import app.users.repository.UserRepository;
 import app.users.repository.UserRepositorySingleton;
@@ -55,6 +60,9 @@ public class ViewAdmin implements View{
     FollowerQueryService followerQueryService;
     UserRepository userRepository;
     PhotoRepository photoRepository;
+    LikeRepository likeRepository;
+    FollowerRepository followerRepository;
+    CommentRepository commentRepository;
     Scanner scanner;
     Admin admin;
 
@@ -74,6 +82,10 @@ public class ViewAdmin implements View{
         this.followerQueryService= FollowerQueryServiceSingleton.getInstance();
         this.userRepository= UserRepositorySingleton.getInstance();
         this.photoRepository= PhotoRepositorySingleton.getInstance();
+        this.likeRepository= LikeRepositorySingleton.getInstance();
+        this.followerRepository= FollowerRepositorySingleton.getInstance();
+        this.commentRepository= CommentRepositorySingleton.getInstance();
+
 
         scanner=new Scanner(System.in);
         this.admin=admin;
@@ -139,25 +151,25 @@ public class ViewAdmin implements View{
     }
 
     public void likeNumber(){
-        System.out.println("Numarul total de like-uri:  "+likeQueryService.likeCounter(this.admin.getId()));
+        System.out.println("Numarul total de like-uri:  "+likeRepository.likeCounter(this.admin.getId()));
     }
 
     public void showComments(){
-        List<Comment> comments=commentQueryService.afisareComentariiByUserId(admin.getId());
+        List<Comment> comments=commentRepository.afisareComentariiByUserId(admin.getId());
         for (int i=0;i<comments.size();i++){
             System.out.println("Comentariu: "+comments.get(i).getCommentText()+"--> la poza:"+comments.get(i).getPhotoId());
         }
     }
 
     public void followersNumber(){
-        System.out.println("Numar followers: "+followerQueryService.followersCounter(admin.getId()));
+        System.out.println("Numar followers: "+followerRepository.followersCounter(admin.getId()));
     }
 
     public void likesByPhotoId(){
         int photoId1;
         System.out.println("Introduceti id-ul pozei: ");
         photoId1=Integer.parseInt(scanner.nextLine());
-        int numar= likeQueryService.likesByPhotoId(photoId1);
+        int numar= likeRepository.likesByPhotoId(photoId1);
         System.out.println("Numarul de like-uri pentru poza selectata este: "+ numar);
     }
 

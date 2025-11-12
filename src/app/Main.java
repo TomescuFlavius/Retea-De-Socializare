@@ -1,11 +1,5 @@
 package app;
 
-import app.likes.exceptions.YouAlreadyLikedThePhotoException;
-import app.likes.models.Like;
-import app.likes.services.LikeCommandService;
-import app.likes.services.LikeCommandServiceImpl;
-import app.likes.services.LikeQueryService;
-import app.likes.services.LikeQueryServiceImpl;
 import app.users.models.Admin;
 import app.users.models.Client;
 import app.view.View;
@@ -19,7 +13,6 @@ public class Main {
         Admin admin= new Admin("ADMIN,10,Marian,parola1,2023-12-15,USER_CREATE;USER_DELETE;USER_UPDATE;USER_READ,2000.0,2022-10-10");
         View view= new ViewClient(client);
         View view1= new ViewAdmin(admin);
-
         view1.play();
 
 

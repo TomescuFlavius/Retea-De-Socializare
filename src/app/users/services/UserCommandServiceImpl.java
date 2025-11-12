@@ -18,7 +18,7 @@ public class UserCommandServiceImpl implements UserCommandService {
     public User add(User user) throws UserAlreadyExistException {
          if(userRepository.getUserByUsername(user.getUsername())!=null){
              throw  new UserAlreadyExistException();
-        }
+         }
         return userRepository.add(user);
     }
 
