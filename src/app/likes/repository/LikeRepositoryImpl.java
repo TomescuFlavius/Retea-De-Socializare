@@ -77,33 +77,23 @@ public class LikeRepositoryImpl implements LikeRepository {
 
     @Override
     public int likeCounter(int id) {
-        int ct=0;
-        for (Like like:likes){
-            if (like.getUserId()==id){
-                ct++;
-            }
-        }
-        return ct;
+        return (int) likes.stream()
+                .filter(like -> like.getUserId() == id)
+                .count();
     }
 
     @Override
     public int likesByPhotoId(int id) {
-        int ct=0;
-        for(Like like: likes){
-            if (like.getPhotoId()==id){
-                ct++;
-            }
-        }
-        return ct;
+        return (int) likes.stream()
+                .filter(like -> like.getPhotoId() == id)
+                .count();
     }
 
     @Override
     public Like getLikeByPhotoId(int id) {
-        for (Like like: likes){
-            if (like.getPhotoId()==id){
-                return like;
-            }
-        }
-        return null;
+        return likes.stream()
+                .filter(like -> like.getPhotoId() == id)
+                .findFirst()
+                .orElse(null);
     }
 }

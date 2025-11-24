@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class CommentRepositoryImpl implements CommentRepository{
 
@@ -59,12 +60,10 @@ public class CommentRepositoryImpl implements CommentRepository{
     }
 
     public Comment getCommentById(int id){
-        for (Comment comment: comments){
-            if(comment.getId()==id){
-                return comment;
-            }
-        }
-        return null;
+        return comments.stream()
+                .filter(comment -> comment.getUserId()==id)
+                .findFirst()
+                .orElse(null);
     }
 
     private int RandomId(){
@@ -88,14 +87,9 @@ public class CommentRepositoryImpl implements CommentRepository{
 
     @Override
     public List<Comment> afisareComentariiByUserId(int id) {
-        List<Comment> comments1=new ArrayList<>();
-        for (Comment comment:comments){
-            if (comment.getUserId()==id){
-                comments1.add(comment);
-            }
-        }
-        return comments1;
-
+        return comments.stream()
+                .filter(comment -> comment.getUserId() == id)
+                .collect(Collectors.toList());
     }
 
     @Override

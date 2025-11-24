@@ -72,12 +72,8 @@ public class FollowerRepositoryImpl implements FollowerRepository{
 
     @Override
     public int followersCounter(int id) {
-        int ct=0;
-        for (Follower follower:followers){
-            if (follower.getFolloweeId()==id){
-                ct++;
-            }
-        }
-        return ct;
+        return (int) followers.stream()
+                .filter(follower -> follower.getFolloweeId()==id)
+                .count();
     }
 }

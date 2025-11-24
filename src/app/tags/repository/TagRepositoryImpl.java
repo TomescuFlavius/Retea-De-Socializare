@@ -55,12 +55,10 @@ public class TagRepositoryImpl implements TagRepository{
     }
 
     private Tag getTagById(int id){
-        for(Tag tag: tags){
-            if (tag.getId()==id){
-                return tag;
-            }
-        }
-        return null;
+        return tags.stream()
+                .filter(tag -> tag.getId() == id)
+                .findFirst()
+                .orElse(null);
     }
 
     private int RandomId(){

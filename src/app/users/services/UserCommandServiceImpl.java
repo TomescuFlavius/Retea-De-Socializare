@@ -5,6 +5,8 @@ import app.users.models.User;
 import app.users.repository.UserRepository;
 import app.users.repository.UserRepositorySingleton;
 
+import java.util.Optional;
+
 
 public class UserCommandServiceImpl implements UserCommandService {
 
@@ -16,17 +18,16 @@ public class UserCommandServiceImpl implements UserCommandService {
 
     @Override
     public User add(User user) throws UserAlreadyExistException {
-         if(userRepository.getUserByUsername(user.getUsername())!=null){
-             throw  new UserAlreadyExistException();
-         }
+        if (Optional.ofNullable(userRepository.getUserByUsername(user.getUsername())).isPresent()) {
+            throw new UserAlreadyExistException();
+    }
         return userRepository.add(user);
     }
 
     @Override
     public User deleteUser(User user) throws UserNotFoundException {
-        if (userRepository.getUserByUsername(user.getUsername())==null){
-            throw new UserNotFoundException();
-        }
+        Optional.ofNullable(userRepository.getUserByUsername(user.getUsername()))
+                .orElseThrow(UserNotFoundException::new);
         return userRepository.delete(user);
     }
 }

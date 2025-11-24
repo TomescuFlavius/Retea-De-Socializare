@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class PhotoRepositoryImpl implements PhotoRepository {
 
@@ -54,12 +55,10 @@ public class PhotoRepositoryImpl implements PhotoRepository {
 
     @Override
     public Photo getPhotoById(int id){
-        for(Photo photo: photos){
-            if (photo.getId()==id){
-                return photo;
-            }
-        }
-        return null;
+        return photos.stream()
+                .filter(photo -> photo.getId() == id)
+                .findFirst()
+                .orElse(null);
     }
 
     private int RandomId(){
@@ -99,12 +98,8 @@ public class PhotoRepositoryImpl implements PhotoRepository {
 
     @Override
     public List<Photo> getPhotosByUserId(int id) {
-        List<Photo> photos1=new ArrayList<>();
-        for (Photo photo:photos){
-            if (photo.getUserId()==id){
-                photos1.add(photo);
-            }
-        }
-        return photos1;
+        return photos.stream()
+                .filter(photo -> photo.getUserId() == id)
+                .collect(Collectors.toList());
     }
 }

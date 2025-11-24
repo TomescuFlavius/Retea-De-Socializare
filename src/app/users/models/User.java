@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class User implements Comparable<User>, UserPermissions {
+public class User implements Comparable<User>, UserPermissions {
     protected int id;
     protected String username;
     protected String password;
@@ -78,6 +78,16 @@ public abstract class User implements Comparable<User>, UserPermissions {
     }
 
     @Override
+    public void addPermission(Permissions permissions) {
+
+    }
+
+    @Override
+    public void erasePermission(Permissions permissions) {
+
+    }
+
+    @Override
     public String toString() {
         return  id + "," + username + "," +password + "," + createdAt+","+permissions;
     }
@@ -88,5 +98,13 @@ public abstract class User implements Comparable<User>, UserPermissions {
         return ((User) o).id == user.id && ((User) o).username == user.username && ((User) o).createdAt == user.createdAt;
     }
 
-    public abstract int compareTo(User o);
+    public  int compareTo(User o){
+        if (this.getId()>o.getId()){
+            return 1;
+        }
+        else if (this.getId()<o.getId()){
+            return -1;
+        }
+        return 0;
+    }
 }

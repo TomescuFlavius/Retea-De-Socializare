@@ -4,6 +4,8 @@ import app.users.models.User;
 import app.users.repository.UserRepository;
 import app.users.repository.UserRepositorySingleton;
 
+import java.util.Optional;
+
 
 public class UserQueryServiceImpl implements UserQueryService {
 
@@ -15,10 +17,8 @@ public class UserQueryServiceImpl implements UserQueryService {
 
     @Override
     public User getUserById(int id) throws UserNotFoundException{
-        if (userRepository.getUserById(id)==null){
-            throw new UserNotFoundException();
-        }
-        return userRepository.getUserById(id);
+        return Optional.ofNullable(userRepository.getUserById(id))
+                .orElseThrow(UserNotFoundException::new);
     }
 
 
